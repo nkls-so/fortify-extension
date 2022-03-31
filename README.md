@@ -1,4 +1,6 @@
-# Fortify Two Factor Authentication Extension
+<p align="center"><img src="./art/banner.png" alt="Banner Fortify Extension"></p>
+
+# Fortify Extension
 
 This package adds SMS and email to Laravel Fortify's two factor authentication.
 
@@ -7,12 +9,24 @@ This package adds SMS and email to Laravel Fortify's two factor authentication.
 You can install this package via Composer:
 
 ```sh
-composer require nklsio/fortify-2fa-extension
+composer require nkls/fortify-extension
+```
+
+```sh
+php artisan vendor:publish --provider="Nkls\FortifyExtension\FortifyExtensionServiceProvider"
 ```
 
 ### Setup
 
-tbd
+```php
+'features' => [
+    Features::twoFactorAuthentication([
+        'confirm' => true,
+        'confirmPassword' => true,
+        'useAdditionalChannels' => true,
+    ]),
+],
+```
 
 ## Usage
 
