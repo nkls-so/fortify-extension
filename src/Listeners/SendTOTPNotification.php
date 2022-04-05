@@ -16,6 +16,6 @@ class SendTOTPNotification
      */
     public function handle(TwoFactorAuthenticationEnabled|TwoFactorAuthenticationChallenged $event)
     {
-        app('fortify-extension')->sendTOTPNotification($event->user);
+        app('fortify-extension')->sendTOTPNotification(null, $event->user);
     }
 }

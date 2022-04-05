@@ -5,10 +5,9 @@ namespace Nkls\FortifyExtension;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\Features;
 use Nkls\FortifyExtension\Enums\TwoFactorChannel;
+use Nkls\FortifyExtension\Http\Requests\TwoFactorLoginRequest;
 use Nkls\FortifyExtension\Notifications\TOTPCode;
 
 class FortifyExtension
@@ -44,11 +43,9 @@ class FortifyExtension
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function sendTOTPNotification(User $user)
+    public function sendTOTPNotification(TwoFactorLoginRequest $request = null, User $user = null)
     {
-        if (Auth::check()) {
-            return new JsonResponse('', Response::HTTP_NO_CONTENT);
-        }
+        $user = $user ?? $request->challengedUser();
 
         if (TwoFactorChannel::TOTP_EMAIL === $user->two_factor_channel
             || TwoFactorChannel::TOTP_SMS === $user->two_factor_channel)

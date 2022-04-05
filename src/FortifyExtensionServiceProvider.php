@@ -5,14 +5,19 @@ namespace Nkls\FortifyExtension;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Fortify\Actions\ConfirmTwoFactorAuthentication as FortifyConfirmTwoFactorAuthentication;
 use Laravel\Fortify\Actions\DisableTwoFactorAuthentication as FortifyDisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication as FortifyEnableTwoFactorAuthentication;
+use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider as FortifyTwoFactorAuthenticationProvider;
 use Laravel\Fortify\Events\TwoFactorAuthenticationChallenged;
 use Laravel\Fortify\Events\TwoFactorAuthenticationEnabled;
 use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController as FortifyTwoFactorAuthenticationController;
+use Laravel\Fortify\Http\Requests\TwoFactorLoginRequest as FortifyTwoFactorLoginRequest;
+use Nkls\FortifyExtension\Actions\ConfirmTwoFactorAuthentication;
 use Nkls\FortifyExtension\Actions\DisableTwoFactorAuthentication;
 use Nkls\FortifyExtension\Actions\EnableTwoFactorAuthentication;
 use Nkls\FortifyExtension\Http\Controllers\TwoFactorAuthenticationController;
+use Nkls\FortifyExtension\Http\Requests\TwoFactorLoginRequest;
 use Nkls\FortifyExtension\Listeners\SendTOTPNotification;
 
 class FortifyExtensionServiceProvider extends ServiceProvider
@@ -31,6 +36,9 @@ class FortifyExtensionServiceProvider extends ServiceProvider
         $this->app->bind(FortifyTwoFactorAuthenticationController::class, TwoFactorAuthenticationController::class);
         $this->app->bind(FortifyEnableTwoFactorAuthentication::class, EnableTwoFactorAuthentication::class);
         $this->app->bind(FortifyDisableTwoFactorAuthentication::class, DisableTwoFactorAuthentication::class);
+        $this->app->bind(FortifyConfirmTwoFactorAuthentication::class, ConfirmTwoFactorAuthentication::class);
+        $this->app->bind(FortifyTwoFactorLoginRequest::class, TwoFactorLoginRequest::class);
+        $this->app->bind(FortifyTwoFactorAuthenticationProvider::class, TwoFactorAuthenticationProvider::class);
     }
 
     /**
