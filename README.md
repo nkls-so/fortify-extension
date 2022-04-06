@@ -38,4 +38,4 @@ If you discover a security vulnerability within the package, please reach out to
 
 ## License
 
-The laravel-ciphersweet package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The fortify-extension package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
