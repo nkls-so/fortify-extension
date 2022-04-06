@@ -13,11 +13,11 @@ class EnableTwoFactorAuthentication extends FortifyEnableTwoFactorAuthentication
     /**
      * Enable two factor authentication for the user.
      *
-     * @param Request $request
+     * @param EnableTwoFactorAuthenticationRequest $request
      *
      * @return void
      */
-    public function __invoke(EnableTwoFactorAuthenticationRequest $request)
+    public function __invoke(EnableTwoFactorAuthenticationRequest $request = null)
     {
         $validated = $request->validated();
         $user = $request->user();
