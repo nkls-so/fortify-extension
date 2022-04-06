@@ -1,10 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Nkls\FortifyExtension\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
+use Nkls\FortifyExtension\Enums\TwoFactorChannel;
 
 class EnableTwoFactorAuthenticationRequest extends FormRequest
 {
@@ -22,7 +22,8 @@ class EnableTwoFactorAuthenticationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'channel' => 'string',
+            'channel' => 'required', [new Enum(TwoFactorChannel::class)],
+            'phone' => 'required_if:channel,'.TwoFactorChannel::TOTP_SMS->value.'|string',
         ];
     }
 }

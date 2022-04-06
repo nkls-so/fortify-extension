@@ -20,12 +20,10 @@ return new class () extends Migration {
                     ->nullable()
                 ;
 
-                if (!Schema::hasColumn('users', 'phone')) {
-                    $table->integer('phone')
-                        ->after('password')
-                        ->nullable()
-                    ;
-                }
+                $table->string('two_factor_phone')
+                    ->after('password')
+                    ->nullable()
+                ;
             }
         });
     }
@@ -39,7 +37,7 @@ return new class () extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(FortifyExtension::useAdditionalTwoFactorChannels() ? [
-                'phone',
+                'two_factor_phone',
                 'two_factor_channel',
             ] : []);
         });
